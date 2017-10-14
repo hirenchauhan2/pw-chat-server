@@ -40,9 +40,8 @@ module.exports = function (app) {
       allowNull: true
     },
 
-    phone: {
+    peerId: {
       type: DataTypes.STRING(16),
-      allowNull: true,
     },
 
     googleId: { type: DataTypes.STRING, allowNull: true },
@@ -62,7 +61,7 @@ module.exports = function (app) {
     indexes: [
       {
         unique: true,
-        fields: ['email', 'phone', 'facebookId', 'googleId']
+        fields: ['email', 'peerId', 'facebookId', 'googleId']
       }
     ],
     paranoid: true,
@@ -86,9 +85,9 @@ module.exports = function (app) {
     // User can have many contacts
     users.hasMany(contacts, { as: 'Contacts' });
     // user can have many conversations
-    users.hasMany(conversations, { as: 'Conversations', foreignKey: 'fk_initiaterID' });
-    users.hasOne(conversations, { as: 'Partner', foreignKey: 'fk_partnerID' });
-    users.hasOne(contacts, { as: 'User', foreignKey: 'fk_contactID' });
+    users.hasMany(conversations, { as: 'Conversations' });
+    users.hasOne(conversations, { as: 'Partner', foreignKey: 'fk_partnerId' });
+    users.hasOne(contacts, { as: 'User', foreignKey: 'fk_contactId' });
   };
 
   return users;

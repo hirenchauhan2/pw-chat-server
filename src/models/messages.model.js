@@ -36,8 +36,7 @@ module.exports = function (app) {
     },
     callDuration: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: null
+      allowNull: true
     }
   }, {
     paranoid: true,
@@ -52,7 +51,7 @@ module.exports = function (app) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
     const { users } = models;
-    messages.belongsTo(users, { as: 'Sender', foreignKey: 'senderId' });
+    messages.belongsTo(users);
   };
 
   return messages;

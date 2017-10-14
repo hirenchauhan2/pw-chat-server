@@ -11,12 +11,14 @@ const restrict = [
   })
 ];
 
+const genPeerId = require('../../hooks/gen-peer-id');
+
 module.exports = {
   before: {
     all: [],
     find: [ authenticate('jwt') ],
     get: [ ...restrict ],
-    create: [ hashPassword() ],
+    create: [hashPassword(), genPeerId()],
     update: [ ...restrict, hashPassword() ],
     patch: [ ...restrict, hashPassword() ],
     remove: [ ...restrict ]
