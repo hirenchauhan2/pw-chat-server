@@ -4,6 +4,7 @@ const compress = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
+const pug = require('pug');
 
 const feathers = require('feathers');
 const configuration = require('feathers-configuration');
@@ -35,7 +36,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 // Host the public folder
 app.use('/', feathers.static(app.get('public')));
-
+// set pug as view engine
+app.set('views', 'src/views');
+app.set('view engine', 'pug');
 // Set up Plugins and providers
 app.configure(hooks());
 app.configure(sequelize);
@@ -76,6 +79,18 @@ mapHookFnToService(
   '/users/:userId/conversations/:conversationId/messages',
   mapConversationIdToData
 );
+
+// configure routes for signup verification and password reset
+app.get('/login/:type/:token', (req, res) => {
+  const { type, token } = req.params;
+  if (type === 'verify') {
+    res.render('verifySignup', { token });
+  } else if (type === 'reset') {
+    res.render('resetPassword', { token });
+  }
+});
+
+
 
 // Configure a middleware for 404s and the error handler
 app.use(notFound());
