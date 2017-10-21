@@ -3,35 +3,43 @@
 const Sequelize = require('sequelize');
 const DataTypes = Sequelize.DataTypes;
 
-module.exports = function (app) {
+module.exports = function(app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const contacts = sequelizeClient.define('contacts', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+  const contacts = sequelizeClient.define(
+    'contacts',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      fullName: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isEmail: true
+        }
+      },
+      peerId: {
+        type: DataTypes.STRING,
+        allowNull: false
+      }
     },
-    fullName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isEmail: true
+    {
+      paranoid: true,
+      hooks: {
+        beforeCount(options) {
+          options.raw = true;
+        }
       }
     }
-  }, {
-    paranoid: true,
-    hooks: {
-      beforeCount(options) {
-        options.raw = true;
-      }
-    }
-  });
-
-  contacts.associate = function (models) { // eslint-disable-line no-unused-vars
+  );
+  // eslint-disable-next-line no-unused-vars
+  contacts.associate = function(models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };

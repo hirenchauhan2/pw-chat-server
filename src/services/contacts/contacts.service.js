@@ -2,17 +2,14 @@
 const createService = require('feathers-sequelize');
 const createModel = require('../../models/contacts.model');
 const hooks = require('./contacts.hooks');
-const filters = require('./contacts.filters');
 
 module.exports = function () {
   const app = this;
   const Model = createModel(app);
-  const paginate = app.get('paginate');
 
   const options = {
     name: 'contacts',
-    Model,
-    paginate
+    Model
   };
 
   // Initialize our service with any options it requires
@@ -22,8 +19,4 @@ module.exports = function () {
   const service = app.service('contacts');
 
   service.hooks(hooks);
-
-  if (service.filter) {
-    service.filter(filters);
-  }
 };

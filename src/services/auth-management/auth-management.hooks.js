@@ -1,17 +1,23 @@
 const { authenticate } = require('feathers-authentication').hooks;
+const commonHooks = require('feathers-hooks-common');
 
-const addUser = require('../../hooks/add-user');
-
-const addContactid = require('../../hooks/add-contactid');
+const isAction = () => {
+  let args = Array.from(arguments);
+  return hook => args.includes(hook.data.action);
+};
 
 module.exports = {
   before: {
-    all: [authenticate('jwt')],
+    all: [],
     find: [],
     get: [],
-    create: [addUser(), addContactid()],
-    update: [addUser(), addContactid()],
-    patch: [addUser(), addContactid()],
+    create: [
+      commonHooks.iff(isAction('passwordChange', 'identityChange'), [
+        authenticate('jwt')
+      ])
+    ],
+    update: [],
+    patch: [],
     remove: []
   },
 
