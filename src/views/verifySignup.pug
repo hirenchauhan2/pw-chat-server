@@ -1,0 +1,51 @@
+extends layout/main.pug
+
+block titlesection
+  title PW Chat | Verify Email Address
+
+block contents
+  #app
+    v-app
+      v-toolbar(color="indigo" :dark="true" :fixed="true" :app="true")
+        v-toolbar-title PW Chat App
+      main
+        v-content
+          v-container(:fluid="true" :fill-height="true")
+            v-layout(:justify-center="true" :align-center="true")
+              v-flex(:xs12="true" :sm6="true")
+                h3(class="text-xs-center") Welcome!
+
+                v-alert(
+                  :color="alertColor"
+                  :icon="alertIcon"
+                  :value="showAlert"
+                  transition="scale-transition"
+                ) {{ message }}
+
+                v-card
+                  v-card-text(class="text-xs-center")
+                    p Please click the below button to verify your email address.
+                    v-btn(
+                      :block="true"
+                      color="primary"
+                      :loading="loading"
+                      @click.native="verifySignup()"
+                      :disabled="loading || verified"
+                    ) Verify Email
+
+      v-footer(class="text-xs-center" color="indigo" :app="true")
+        span(class="white--text") &copy; 2017
+          |
+          | Project by
+          |
+          strong Hiren Chauhan
+          |
+          | &amp;
+          |
+          strong Chirag Rajput
+
+
+block scripts
+  script window.verifyToken = '#{token}';
+  script(src="/js/feathers-app.js")
+  script(src="/js/verify-signup.js")
