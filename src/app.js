@@ -4,7 +4,6 @@ const compress = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
-const pug = require('pug');
 
 const feathers = require('feathers');
 const configuration = require('feathers-configuration');
