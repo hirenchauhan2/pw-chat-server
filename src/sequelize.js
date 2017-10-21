@@ -2,10 +2,9 @@ const Sequelize = require('sequelize');
 
 module.exports = function () {
   const app = this;
-  const connectionString = app.get('mariadb');
+  const connectionString = app.get('postgres');
   const sequelize = new Sequelize(connectionString, {
-    // as of v4, dialect: 'mariadb' is removed. mysql works just fine
-    dialect: 'mysql',
+    dialect: 'postgres',
     logging: false,
     define: {
       freezeTableName: true
