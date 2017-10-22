@@ -1,0 +1,22 @@
+// Initializes the `conversations` service on path `/conversations`
+const createService = require('feathers-sequelize');
+const createModel = require('../../models/conversations.model');
+const hooks = require('./conversations.hooks');
+
+module.exports = function () {
+  const app = this;
+  const Model = createModel(app);
+
+  const options = {
+    name: 'conversations',
+    Model,
+  };
+
+  // Initialize our service with any options it requires
+  app.use('/conversations', createService(options));
+
+  // Get our initialized service so that we can register hooks and filters
+  const service = app.service('conversations');
+
+  service.hooks(hooks);
+};
