@@ -15,13 +15,15 @@ const restrict = [
 const genPeerId = require('../../hooks/gen-peer-id');
 const sendVerificationEmail = require('../../hooks/send-verification-email');
 
+const addAutomicon = require('../../hooks/add-automicon');
+
 module.exports = {
   before: {
     all: [],
     find: [ authenticate('jwt') ],
     get: [ ...restrict ],
-    create: [hashPassword(), genPeerId(), verifyHooks.addVerification()],
-    update: [ commonHooks.disallow('external') ],
+    create: [hashPassword(), genPeerId(), verifyHooks.addVerification(), addAutomicon()],
+    update: [commonHooks.disallow('external'), addAutomicon()],
     patch: [
       ...restrict,
       commonHooks.iff(commonHooks.isProvider('external'), commonHooks.preventChanges(
