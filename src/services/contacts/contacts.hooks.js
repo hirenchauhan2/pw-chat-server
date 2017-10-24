@@ -1,12 +1,15 @@
 const { authenticate } = require('feathers-authentication').hooks;
+const populate = require('feathers-populate-hook');
 
 const addUser = require('../../hooks/add-user');
 
 const addContactid = require('../../hooks/add-contactid');
 
+const populateContactUser = require('../../hooks/populate-contact-user');
+
 module.exports = {
   before: {
-    all: [authenticate('jwt')],
+    all: [authenticate('jwt'), populate.compatibility()],
     find: [],
     get: [],
     create: [addUser(), addContactid()],
@@ -17,11 +20,11 @@ module.exports = {
 
   after: {
     all: [],
-    find: [],
-    get: [],
-    create: [],
-    update: [],
-    patch: [],
+    find: [populateContactUser()],
+    get: [populateContactUser()],
+    create: [populateContactUser()],
+    update: [populateContactUser()],
+    patch: [populateContactUser()],
     remove: []
   },
 

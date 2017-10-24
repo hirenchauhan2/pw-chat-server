@@ -10,12 +10,12 @@ module.exports = function(options = {}) {
         const user = await User.findOne({
           where: {
             email
-          }
+          },
+          attributes: ['id', 'peerId']
         });
-        const userId = user.dataValues['id'];
-        console.log(`Contact ID: ${userId}`);
-        hook.data = Object.assign({}, hook.data, { fk_contactID: userId });
-        console.log('add-contact-id hook-data', hook.data);
+        const userId = user.id;
+        hook.data.fk_contactId = userId;
+        hook.data.peerId = user.peerId;
         resolve(hook);
       } catch (e) {
         console.log('Error at User.finOne @ addContactID hook', e);
