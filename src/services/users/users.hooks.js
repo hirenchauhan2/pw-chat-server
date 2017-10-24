@@ -2,6 +2,7 @@ const { authenticate } = require('feathers-authentication').hooks;
 const commonHooks = require('feathers-hooks-common');
 const { restrictToOwner } = require('feathers-authentication-hooks');
 const verifyHooks = require('feathers-authentication-management').hooks;
+const populate = require('feathers-populate-hook');
 
 const { hashPassword } = require('feathers-authentication-local').hooks;
 const restrict = [
@@ -19,7 +20,7 @@ const addAutomicon = require('../../hooks/add-automicon');
 
 module.exports = {
   before: {
-    all: [],
+    all: [populate.compatibility()],
     find: [ authenticate('jwt') ],
     get: [ ...restrict ],
     create: [hashPassword(), genPeerId(), verifyHooks.addVerification(), addAutomicon()],
@@ -49,8 +50,23 @@ module.exports = {
         commonHooks.discard('password', 'verifyExpires', 'resetExpires', 'verifyChanges')
       )
     ],
-    find: [],
-    get: [],
+    find: [ ],
+    get: [
+      populate({
+        conversationsByMe: {
+          service: 'conversations',
+          f_key: 'userId'
+        },
+        conversationsByOthers: {
+          service: 'conversations',
+          f_key: 'fk_partnerId'
+        },
+        contacts: {
+          service: 'contacts',
+          f_key: 'userId'
+        }
+      })
+    ],
     create: [
       sendVerificationEmail(),
       verifyHooks.removeVerification(),
