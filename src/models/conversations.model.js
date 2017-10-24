@@ -10,7 +10,15 @@ module.exports = function (app) {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
-    }
+    },
+    deletedByUser: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
+    },
+    deletedByPartner: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
+    },
   }, {
     paranoid:  true,
     hooks: {

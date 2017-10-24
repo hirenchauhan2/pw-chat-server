@@ -39,6 +39,14 @@ module.exports = function(app) {
       callDuration: {
         type: DataTypes.INTEGER,
         allowNull: true
+      },
+      deletedBySender: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true
+      },
+      deletedByReciever: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true
       }
     },
     {
