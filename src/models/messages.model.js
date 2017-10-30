@@ -36,8 +36,12 @@ module.exports = function(app) {
         type: DataTypes.ENUM('READ', 'UNREAD'),
         defaultValue: 'UNREAD'
       },
-      callDuration: {
-        type: DataTypes.INTEGER,
+      callStart: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+      callEnd: {
+        type: DataTypes.DATE,
         allowNull: true
       },
       deletedBySender: {

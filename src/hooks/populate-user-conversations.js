@@ -6,19 +6,18 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return function populateUserConversations (hook) {
     return new Promise(async (resolve, reject) => {
       const { models } = hook.app.get('sequelizeClient');
-      const { conversations: Conversations, users: Users } = models;
+      const { conversations: Conversations } = models;
       let result = Object.assign({}, hook.result);
       const userId = result.id;
       try {
-        const user = await Users.findById(userId);
         const conditions = {
           where: {
+            userId,
             deletedByUser: null
           },
           raw: true
         }
-        let conversations = await user.getConversations(conditions);
-
+        let conversations = await Conversations.findAll(conditions);
         result = Object.assign({}, result, { conversations });
         hook.result = result
         resolve(hook);

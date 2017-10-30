@@ -10,8 +10,8 @@ module.exports = {
     find: [],
     get: [],
     create: [addUser(), processMessage()],
-    update: [addUser(), processMessage()],
-    patch: [addUser(), processMessage()],
+    update: [addUser()],
+    patch: [addUser()],
     remove: []
   },
 

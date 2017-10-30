@@ -8,6 +8,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
       const { conversations: Conversations, users: Users } = models;
       let result = Object.assign({}, hook.result);
       const userId = result.id;
+      console.log('user id -- populateConversationsByOthers ', userId)
       try {
         const conditions = {
           where: {

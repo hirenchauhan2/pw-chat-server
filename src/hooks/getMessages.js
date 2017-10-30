@@ -32,9 +32,6 @@ async function getMessages (Model, cId, userId, ccId, partnerId) {
   try {
     const params = {
       where: condition,
-      order: [
-        ['createdAt', 'DESC']
-      ],
       raw: true
     }
     const conversation = await Model.findById(cId);
