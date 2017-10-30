@@ -23,8 +23,9 @@
   },
   "scripts": {
     "test": "npm run eslint && npm run mocha",
-    "eslint": "eslint src/. test/. --config .eslintrc.json",
-    "start": "nodemon --watch src/ -e js src/",
+    "eslint": "./node_modules/.bin/eslint src/. test/. --config .eslintrc.json",
+    "dev": "nodemon --watch src/ -e js src/",
+    "start": "node src/",
     "mocha": "mocha test/ --recursive"
   },
   "dependencies": {
