@@ -2,4 +2,4 @@
 
 const app = feathers()
   .configure(feathers.hooks())
-  .configure(feathers.rest('http://localhost:3030').axios(window.axios));
+  .configure(feathers.rest('/').axios(window.axios));

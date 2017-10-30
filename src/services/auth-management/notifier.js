@@ -8,9 +8,10 @@ module.exports = function(app) {
   function getLink(type, hash) {
     var port = app.get('port') === '80' || isProd ? '' : ':' + app.get('port');
     var host = app.get('host') === 'HOST' ? 'localhost' : app.get('host');
-    var protocal = 'http';
-    protocal += '://';
-    return `${protocal}${host}${port}/login/${type}/${hash}`;
+    var protocol = (app.get('protocol') === 'PROTOCOL') ? 'http': app.get('protocol');
+
+    protocol += '://';
+    return `${protocol}${host}${port}/login/${type}/${hash}`;
   }
 
   function sendEmail(email) {
