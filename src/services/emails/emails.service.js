@@ -16,12 +16,6 @@ module.exports = function() {
 
   const xoauth2Generator = XOAuth2.createXOAuth2Generator(app.get('authentication').gmail);
 
-  xoauth2Generator.on('token', (token) => {
-    // eslint-disable-next-line
-    console.log('New token for %s: %s', token.user, token.accessToken);
-    fs.writeFileSync('token.txt', token.accessToken);
-  });
-
   let transporter;
   // const isProd = process.env.NODE_ENV === 'production';
 
