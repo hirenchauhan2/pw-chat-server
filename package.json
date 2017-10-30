@@ -63,13 +63,13 @@
     "serve-favicon": "^2.4.3",
     "winston": "^2.3.1",
     "xoauth2": "^1.2.0",
-    "yeast": "^0.1.2"
-  },
-  "devDependencies": {
+    "yeast": "^0.1.2",
     "eslint": "^4.5.0",
     "mocha": "^3.5.0",
     "nodemon": "^1.12.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1"
+  },
+  "devDependencies": {
   }
 }
