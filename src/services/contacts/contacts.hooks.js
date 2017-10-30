@@ -5,7 +5,16 @@ const addUser = require('../../hooks/add-user');
 
 const addContactid = require('../../hooks/add-contactid');
 
-const populateContactUser = require('../../hooks/populate-contact-user');
+const populateUser = () => populate({
+  user: {
+    service: 'users',
+    f_key: 'id',
+    l_key: 'fk_contactId',
+    query: {
+      $select: ['profilePicture', 'isOnline', 'peerId']
+    }
+  }
+});
 
 module.exports = {
   before: {
@@ -20,11 +29,11 @@ module.exports = {
 
   after: {
     all: [],
-    find: [populateContactUser()],
-    get: [populateContactUser()],
-    create: [populateContactUser()],
-    update: [populateContactUser()],
-    patch: [populateContactUser()],
+    find: [populateUser()],
+    get: [populateUser()],
+    create: [],
+    update: [],
+    patch: [],
     remove: []
   },
 

@@ -2,7 +2,6 @@ const { authenticate } = require('feathers-authentication').hooks;
 const commonHooks = require('feathers-hooks-common');
 const { restrictToOwner } = require('feathers-authentication-hooks');
 const verifyHooks = require('feathers-authentication-management').hooks;
-const populate = require('feathers-populate-hook');
 
 const { hashPassword } = require('feathers-authentication-local').hooks;
 const restrict = [
@@ -18,9 +17,19 @@ const sendVerificationEmail = require('../../hooks/send-verification-email');
 
 const addAutomicon = require('../../hooks/add-automicon');
 
+
+const populateUserConversations = require('../../hooks/populate-user-conversations');
+
+
+const populateConversationsByOthers = require('../../hooks/populate-conversations-by-others');
+
+
+const populateUserContacts = require('../../hooks/populate-user-contacts');
+
+
 module.exports = {
   before: {
-    all: [populate.compatibility()],
+    all: [],
     find: [ authenticate('jwt') ],
     get: [ ...restrict ],
     create: [hashPassword(), genPeerId(), verifyHooks.addVerification(), addAutomicon()],
@@ -50,22 +59,11 @@ module.exports = {
         commonHooks.discard('password', 'verifyExpires', 'resetExpires', 'verifyChanges')
       )
     ],
-    find: [ ],
+    find: [],
     get: [
-      populate({
-        conversationsByMe: {
-          service: 'conversations',
-          f_key: 'userId'
-        },
-        conversationsByOthers: {
-          service: 'conversations',
-          f_key: 'fk_partnerId'
-        },
-        contacts: {
-          service: 'contacts',
-          f_key: 'userId'
-        }
-      })
+      populateUserConversations(),
+      populateConversationsByOthers(),
+      populateUserContacts()
     ],
     create: [
       sendVerificationEmail(),

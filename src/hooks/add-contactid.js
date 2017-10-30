@@ -13,6 +13,11 @@ module.exports = function(options = {}) {
           },
           attributes: ['id', 'peerId']
         });
+
+        if (!user) {
+          reject(new Error(`Cannot find user with email: ${email}`))
+        }
+
         const userId = user.id;
         hook.data.fk_contactId = userId;
         hook.data.peerId = user.peerId;
