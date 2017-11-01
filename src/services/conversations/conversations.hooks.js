@@ -1,24 +1,11 @@
 const { authenticate } = require('feathers-authentication').hooks;
-const populate = require('feathers-populate-hook');
-// const { populate } = require('feathers-hooks-common');
 const populateMessages = require('../../hooks/populate-conversation-messages');
 const addUser = require('../../hooks/add-user');
-
-const populatePartner = () => populate({
-  partner: {
-    service: 'users',
-    f_key: 'id',
-    l_key: 'fk_partnerId',
-    one: true,
-    query: {
-      $select: ['profilePicture', 'peerId']
-    }
-  }
-});
+const populatePartner = require('../../hooks/populate-conversation-partner');
 
 module.exports = {
   before: {
-    all: [ authenticate('jwt'), populate.compatibility() ],
+    all: [ authenticate('jwt') ],
     find: [],
     get: [],
     create: [addUser()],

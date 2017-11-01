@@ -14,7 +14,20 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
           raw: true
         }
         let contacts = await user.getContacts(conditions);
-
+        contacts = await Promise.all(
+          contacts.map(async (c) => {
+          let params = Object.assign({}, conditions, {
+            select: ['profilePicture', 'isOnline']
+          })
+          let user = await Users.findById(c.fk_contactId, params)
+          const contactUser = {
+            profilePicture: user.profilePicture,
+            isOnline: user.isOnline
+          };
+          delete user
+          return Object.assign({}, c , { contactUser })
+          })
+        )
         result = Object.assign({}, result, { contacts });
         hook.result = result
         resolve(hook);

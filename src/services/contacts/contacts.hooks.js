@@ -1,24 +1,13 @@
 const { authenticate } = require('feathers-authentication').hooks;
-const populate = require('feathers-populate-hook');
 
 const addUser = require('../../hooks/add-user');
 
 const addContactid = require('../../hooks/add-contactid');
-
-const populateUser = () => populate({
-  user: {
-    service: 'users',
-    f_key: 'id',
-    l_key: 'fk_contactId',
-    query: {
-      $select: ['profilePicture', 'isOnline', 'peerId']
-    }
-  }
-});
+const populateUser = require('../../hooks/populate-contact-user');
 
 module.exports = {
   before: {
-    all: [authenticate('jwt'), populate.compatibility()],
+    all: [authenticate('jwt')],
     find: [],
     get: [],
     create: [addUser(), addContactid()],
@@ -31,9 +20,9 @@ module.exports = {
     all: [],
     find: [populateUser()],
     get: [populateUser()],
-    create: [],
-    update: [],
-    patch: [],
+    create: [populateUser()],
+    update: [populateUser()],
+    patch: [populateUser()],
     remove: []
   },
 

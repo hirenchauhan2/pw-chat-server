@@ -11,13 +11,23 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         raw: true
       };
       try {
-        let user = await Users.findById(result.fk_contactId, params);
-        const contactUser = {
-          profilePicture: user.profilePicture,
-          isOnline: user.isOnline
+        const user = hook.params.user;
+        let partner;
+        // The current User is owner, find the partner
+        if (user.id === result.userId) {
+          partner = await Users.findById(result.fk_partnerId, params);
+        } else {
+          // The current user is Partner, find the  owner
+          partner = await Users.findById(result.userId, params);
+        }
+
+        partner = {
+          name: `${partner.firstName} ${partner.lastName}`,
+          email: partner.email,
+          profilePicture: partner.profilePicture
         };
-        delete user
-        hook.result = Object.assign({}, result , { contactUser });
+
+        hook.result = Object.assign({}, result , { partner });
         resolve(hook);
       } catch(e) {
         // statements
