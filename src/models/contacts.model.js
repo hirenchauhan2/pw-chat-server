@@ -30,6 +30,12 @@ module.exports = function(app) {
       }
     },
     {
+      indexes: [
+        {
+          unique: true,
+          fields: ['userId', 'email']
+        }
+      ],
       paranoid: true,
       hooks: {
         beforeCount(options) {
