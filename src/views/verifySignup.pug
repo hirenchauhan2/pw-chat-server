@@ -26,8 +26,9 @@ block contents
                 v-card
                   v-card-text(class="text-xs-center")
                     p Please click the below button to verify your email address.
-                    v-btn(
-                      :block="true"
+                    |
+					v-btn(
+                      block
                       color="primary"
                       :loading="loading"
                       @click.native="verifySignup()"
