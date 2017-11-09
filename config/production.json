@@ -1,6 +1,6 @@
 {
   "complaint_email": "COMPLAINT_EMAIL",
-  "host": "https://potential-waffle-chat.herokuapp.com/",
+  "host": "potential-waffle-chat.herokuapp.com",
   "port": "PORT",
   "protocol": "https",
   "public": "../public/",
@@ -22,7 +22,7 @@
       "header": {
         "type": "access"
       },
-      "audience": "https://yourdomain.com",
+      "audience": "https://potential-waffle-chat.herokuapp.com",
       "subject": "anonymous",
       "issuer": "feathers",
       "algorithm": "HS256",
