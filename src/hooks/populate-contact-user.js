@@ -11,12 +11,12 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         raw: true
       };
       try {
-        let user = await Users.findById(result.fk_contactId, params);
+        const user = await Users.findById(result.fk_contactId, params);
         const contactUser = {
           profilePicture: user.profilePicture,
           isOnline: user.isOnline
         };
-        delete user
+        // delete user
         hook.result = Object.assign({}, result , { contactUser });
         resolve(hook);
       } catch(e) {
