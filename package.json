@@ -59,6 +59,7 @@
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
     "pug": "^2.0.0-rc.4",
+    "puid": "^1.0.7",
     "sequelize": "^4.11.1",
     "sequelize-json": "^2.1.2",
     "serve-favicon": "^2.4.3",
@@ -66,11 +67,11 @@
     "xoauth2": "^1.2.0"
   },
   "devDependencies": {
-	"yeast": "^0.1.2",
     "eslint": "^4.5.0",
     "mocha": "^3.5.0",
     "nodemon": "^1.12.1",
     "request": "^2.81.0",
-    "request-promise": "^4.2.1"
+    "request-promise": "^4.2.1",
+    "yeast": "^0.1.2"
   }
 }

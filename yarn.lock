@@ -3087,6 +3087,10 @@ pug@^2.0.0-rc.4:
     pug-runtime "^2.0.3"
     pug-strip-comments "^1.0.2"
 
+puid@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/puid/-/puid-1.0.7.tgz#fa638a737d7b20419059d93965aed36ca20e1c84"
+
 punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
