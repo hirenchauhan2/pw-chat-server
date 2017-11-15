@@ -4,6 +4,7 @@ const conversations = require('./conversations/conversations.service.js');
 const contacts = require('./contacts/contacts.service.js');
 const messages = require('./messages/messages.service.js');
 const emails = require('./emails/emails.service.js');
+const uploads = require('./profile-picture-upload/profile-picture-upload.service.js')
 
 module.exports = function () {
   const app = this; // eslint-disable-line no-unused-vars
@@ -13,4 +14,5 @@ module.exports = function () {
   app.configure(contacts);
   app.configure(messages);
   app.configure(emails);
+  app.configure(uploads);
 };

@@ -78,6 +78,11 @@
     "ethereal": {
       "user": "ETHEREAL_USER",
       "password": "ETHEREAL_PASSWORD"
+    },
+    "cloudinary": {
+      "cloud_name":"CLD_CLDNAME",
+      "api_key":"CLD_API_KEY",
+      "api_secret":"CLD_API_SECRET"
     }
   },
   "postgres": "DATABASE_URL"
