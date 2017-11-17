@@ -4,13 +4,14 @@ new Vue({
   el: '#app',
   data: {
     valid: false,
-    resetToken: null,
+    resetToken: window.resetToken || null,
     pass1: '',
     pass1Rules: [
       (v) => !!v || 'Password is required'
     ],
     pass2: '',
     pass2Rules: [
+      () => this.pass1 === this.pass2 || 'Password does not match',
       (v) => !!v || 'Password confirmation is required'
     ],
     hidePass1: true,
@@ -24,7 +25,8 @@ new Vue({
   },
   methods: {
     changePassword(pass1, pass2) {
-      if (!pass1 === pass2) {
+      if (pass1 !== pass2) {
+        alert('Password does not match')
         return false;
       }
 
@@ -36,10 +38,11 @@ new Vue({
       const authManagement = app.service('authManagement');
 
       this.loading =  true;
-      authManagement.create({ action: 'resetPwdLong',
+      authManagement.create({
+        action: 'resetPwdLong',
         value: {
-          token, // compares to .resetToken
-          password: pass2, // new password
+          token,
+          password: pass2
         }
       }).then(result => {
         this.loading = false;
@@ -58,11 +61,9 @@ new Vue({
           this.showAlert = true;
           log('Error ', err);
         });
+      this.pass1 = ''
+      this.pass2 = ''
     }
-  },
-  mounted: () => {
-    const resetToken = window.resetToken || null;
-    this.resetToken = resetToken;
   }
 });
 
