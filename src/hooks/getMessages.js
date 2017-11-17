@@ -18,12 +18,12 @@ async function getMessages (Model, cId, userId, ccId, partnerId) {
   let isConvUser = true;
   if (userId === ccId) {
     condition = {
-      deletedBySender: { [Op.eq]: null }
+      deletedBySender: null
     };
   } else if (userId === partnerId) {
     isConvUser = false
     condition = {
-      deletedByReciever: { [Op.eq]: null }
+      deletedByReciever: null
     }
   } else {
     return null;

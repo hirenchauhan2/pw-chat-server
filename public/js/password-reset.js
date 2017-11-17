@@ -52,6 +52,9 @@ new Vue({
         this.showAlert = true;
         this.resetSuccess = true;
         log('Success ', result);
+        this.pass1 = ''
+        this.pass2 = ''
+
       })
         .catch(err => {
           this.message = 'Sorry, but we could not reset your password. Please try again';
@@ -60,9 +63,9 @@ new Vue({
           this.alertIcon = 'warning';
           this.showAlert = true;
           log('Error ', err);
+          this.pass1 = ''
+          this.pass2 = ''
         });
-      this.pass1 = ''
-      this.pass2 = ''
     }
   }
 });
