@@ -1,0 +1,89 @@
+{
+  "complaint_email": "COMPLAINT_EMAIL",
+  "host": "localhost",
+  "protocol": "PROTOCOL",
+  "port": 3030,
+  "public": "../public/",
+  "src": "../src/",
+  "EMAIL": "EMAIL",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "secret": "80daa8dc27accdc83d623f21918f070f269ec35278e52ef9b8b191aef2ab6cd75e00a91ba9ae005a9dfe9af5d3b99a70443fa338db3f13a08adf5dce1cfbb26eb88e94a8e452b54e48af1d766f696c824bd6617d26149a7e3d86d75da421cd5d8ff315f2b08f60bda6663b90acfac0a650b678c16ddec3f9c938038c00e1e0f326f6b3ea9cb405934d90e883c95baaa9df7c2385787e9f71c64bcb39f1a165bdd8224f51c2ad0546ad688eb772b65cafd58495c0e2cacc14b50a5a1d7c5f9eb0e82cedc939511aef97597e490fd4f91a5a24c06d9d18ee54dd1da4d370878f2b5216919428673da085e2d56c4acce64a27ede14f689d2936932ac205b31fd625",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "type": "access"
+      },
+      "audience": "https://potential-waffle-chat.herokuapp.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "usernameField": "email",
+      "passwordField": "password"
+    },
+    "google": {
+      "clientID": "your google client id",
+      "clientSecret": "your google client secret",
+      "successRedirect": "/",
+      "scope": [
+        "profile openid email"
+      ]
+    },
+    "facebook": {
+      "clientID": "your facebook client id",
+      "clientSecret": "your facebook client secret",
+      "successRedirect": "/",
+      "scope": [
+        "public_profile",
+        "email"
+      ],
+      "profileFields": [
+        "id",
+        "displayName",
+        "first_name",
+        "last_name",
+        "email",
+        "gender",
+        "profileUrl",
+        "birthday",
+        "picture",
+        "permissions"
+      ]
+    },
+    "cookie": {
+      "enabled": true,
+      "name": "feathers-jwt",
+      "httpOnly": false,
+      "secure": false
+    },
+    "gmail": {
+      "user": "EMAIL",
+      "clientId": "GMAIL_CLIENT_ID",
+      "clientSecret": "GMAIL_CLIENT_SECRET",
+      "refreshToken": "GMAIL_CLIENT_REFRESH_TOKEN",
+      "accessToken": "GMAIL_CLIENT_ACCESS_TOKEN"
+    },
+    "ethereal": {
+      "user": "ETHEREAL_USER",
+      "password": "ETHEREAL_PASSWORD"
+    },
+    "cloudinary": {
+      "cloud_name": "CLD_CLDNAME",
+      "api_key": "CLD_API_KEY",
+      "api_secret": "CLD_API_SECRET"
+    }
+  },
+  "postgres": "DATABASE_URL"
+};
